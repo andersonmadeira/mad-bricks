@@ -13,6 +13,9 @@ func _fixed_process(delta):
 	
 func _input(event):
 	if event.type == InputEvent.MOUSE_BUTTON && event.is_pressed():
-		var ball = ball_scene.instance()
-		ball.set_pos(get_pos()-Vector2(0, 16))
-		get_tree().get_root().add_child(ball)
+		var balls = get_tree().get_nodes_in_group("Ball")
+		if balls.size() == 0:
+			var ball = ball_scene.instance()
+			ball.set_pos(get_pos()-Vector2(0, 16))
+			ball.add_to_group("Ball")
+			get_tree().get_root().add_child(ball)
